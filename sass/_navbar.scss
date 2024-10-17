@@ -19,7 +19,6 @@
         color: inherit;
         border: none;
         outline: none;
-        margin-right: -200px;
     }
 }
 
@@ -73,6 +72,23 @@
             border: none;
             background: inherit;
             outline: none;
+        }
+    }
+
+    &__hamburger {
+
+        display: none;
+
+        &__wrapper {
+            display: flex;
+            gap: 3px;
+            flex-direction: column;
+        }
+
+        &__item {
+            width: 25px;
+            height: 5px;
+            background: #000;
         }
     }
 }

@@ -1,0 +1,45 @@
+@media(max-width:150px) {}
+
+@media(max-width:990px) {
+    .navbarTop {
+        a {
+            display: none;
+        }
+
+        &__info {
+            margin-right: 10px;
+        }
+    }
+
+    .navbar {
+        &__item {
+            display: none;
+        }
+    }
+}
+
+@media(max-width:590px) {
+    .navbarTop {
+        justify-content: center;
+
+        p {
+            display: none;
+        }
+    }
+
+    .navbar {
+        &__logo {
+            flex: 1;
+        }
+
+        &__input {
+            display: none;
+        }
+
+        &__hamburger {
+            display: block;
+            margin-left: 15px;
+        }
+
+    }
+}
