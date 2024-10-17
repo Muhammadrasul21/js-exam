@@ -16,30 +16,49 @@
             display: none;
         }
     }
-}
 
-@media(max-width:590px) {
-    .navbarTop {
-        justify-content: center;
+    .hero {
+        &__wrapper {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+        }
 
-        p {
-            display: none;
+        &__img {
+            width: auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        &__title {
+            text-align: start;
         }
     }
 
-    .navbar {
-        &__logo {
-            flex: 1;
+
+    @media(max-width:590px) {
+        .navbarTop {
+            justify-content: center;
+
+            p {
+                display: none;
+            }
         }
 
-        &__input {
-            display: none;
-        }
+        .navbar {
+            &__logo {
+                flex: 1;
+            }
 
-        &__hamburger {
-            display: block;
-            margin-left: 15px;
-        }
+            &__input {
+                display: none;
+            }
 
+            &__hamburger {
+                display: block;
+                margin-left: 15px;
+            }
+
+        }
     }
 }
