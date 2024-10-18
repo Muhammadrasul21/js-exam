@@ -1,0 +1,144 @@
+.products {
+    &__logo {
+        margin-top: 63px;
+        margin-bottom: 22px;
+    }
+
+    &__card {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        padding: 20px;
+    }
+
+    &__arrowBtn {
+        display: flex;
+        gap: 8px;
+        width: 100%;
+        justify-content: end;
+        margin-bottom: 60px;
+
+        button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            border: none;
+            font-size: 20px;
+        }
+    }
+}
+
+.product {
+    &__card {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        position: relative;
+        background-color: #fff;
+        border-radius: 10px;
+        text-align: start;
+        padding: 20px 10px 0px 20px;
+        width: 270px;
+        height: 400px;
+        transition: all .8s ease;
+        overflow: hidden;
+        transition: all .8s ease;
+
+        &:hover {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            color: #fff;
+        }
+
+        img {
+            width: 190px;
+            height: 180px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+        p {
+            font-weight: 500;
+        }
+    }
+
+    &__image {
+        max-width: 100%;
+    }
+
+    &__details {
+        margin-top: 10px;
+    }
+
+    &__title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    &__btn {
+        background-color: #000;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all .5s ease;
+
+        &:hover {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    &__icons {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        opacity: 0;
+        transition: opacity .5s ease;
+
+        &:hover {
+            opacity: 1;
+
+        }
+
+        i {
+            background-color: #f8f8f8;
+            border-radius: 50%;
+            padding: 10px;
+            color: #000;
+        }
+    }
+
+    &__price {
+        font-size: 20px;
+        color: #ff6600;
+        font-weight: bold;
+    }
+
+    &__stars {
+        display: flex;
+        gap: 5px;
+        color: #ffcc00;
+    }
+
+    &__rating {
+        font-size: 14px;
+        color: #000;
+    }
+}
+
+.card__rating {
+    display: flex;
+    gap: 10px;
+}

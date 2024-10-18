@@ -8,7 +8,7 @@ fetch('https://fakestoreapi.com/products/categories')
     .then(res => res.json())
     .then(categories => {
         localStorage.setItem(`categories`, JSON.stringify(categories))
-        
+
         const categoryGrid = document.querySelector('#categoryGrid');
         categories.forEach(category => {
             const categoryCard = document.createElement('div');
@@ -21,5 +21,41 @@ fetch('https://fakestoreapi.com/products/categories')
                 <p>${category}</p>
             `;
             categoryGrid.appendChild(categoryCard);
+        });
+    });
+
+fetch('https://fakestoreapi.com/products')
+    .then(res => res.json())
+    .then(products => {
+        const productsCard = document.querySelector('#productsCard');
+
+        products.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.classList.add('product__card');
+
+            const ratingStars = `
+                <div>
+                    ${'<i class="fa-solid fa-star"></i>'.repeat(Math.floor(product.rating.rate))}
+                    ${'<i class="fa-regular fa-star"></i>'.repeat(5 - Math.floor(product.rating.rate))}
+                </div>
+            `;
+
+            productCard.innerHTML = `
+                <div class="product__icons">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-solid fa-eye"></i>
+                </div>
+                <img src="${product.image}" alt="${product.title}" class="product__image">
+                <div class="product__details">
+                    <h3 class="product__title">${product.title}</h3>
+                <div class = "card__rating">
+                    <p class="product__price">$${product.price}</p>
+                    <div class="product__stars">${ratingStars}</div>
+                    <p class="product__rating">(${product.rating.count})</p>  
+                </div>
+                    <button class="product__btn">Add to Cart</button>
+                </div>
+            `;
+            productsCard.appendChild(productCard);
         });
     });
