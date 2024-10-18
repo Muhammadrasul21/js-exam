@@ -7,6 +7,12 @@
     color: #fff;
     font-size: 14px;
 
+    p{
+        transform: translateX(21%);
+        display: flex;
+        gap: 15px;
+    }
+
     &__info {
         display: flex;
         align-items: center;
@@ -55,6 +61,15 @@
         display: flex;
         align-items: center;
         gap: 15px;
+
+        i {
+            transition: all .5s ease;
+            font-size: 18px;
+
+            &:hover {
+                color: #DB4444;
+            }
+        }
     }
 
     &__input {
@@ -72,6 +87,14 @@
             border: none;
             background: inherit;
             outline: none;
+        }
+
+        i {
+            transition: all .5s ease;
+
+            &:hover {
+                color: #DB4444;
+            }
         }
     }
 

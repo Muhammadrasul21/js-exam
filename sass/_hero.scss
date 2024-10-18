@@ -28,6 +28,13 @@
         align-items: center;
         justify-content: center;
         gap: 10px;
+        transition: all .5s ease;
+        
+        &:hover {
+            background: #DB4444;
+            border-bottom: #DB4444;
+            border-radius: 4px;
+        }
     }
 
     &__logo {
