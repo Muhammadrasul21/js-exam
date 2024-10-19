@@ -1,0 +1,47 @@
+.footer {
+    background: #000;
+    height: 440px;
+    display: flex;
+    align-items: center;
+
+    &__wrapper {
+        color: #fff;
+        gap: 87px;
+        display: flex;
+    }
+
+    &__item {
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-bottom: 16px;
+
+            li:nth-child(1) {
+                font-size: 24px;
+            }
+        }
+    }
+
+    &__input {
+        border: 1px solid#fff;
+        background: inherit;
+        width: 205px;
+        padding: 4px;
+        border-radius: 4px;
+
+        input {
+            background: inherit;
+            border: none;
+            outline-style: none;
+            color: #fff;
+            padding: 4px;
+        }
+    }
+
+    &__icons {
+        display: flex;
+        gap: 25px;
+    }
+}
