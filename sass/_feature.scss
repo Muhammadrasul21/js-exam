@@ -1,0 +1,93 @@
+.feature {
+    &__wrapper {
+        margin-bottom: 140px;
+        display: flex;
+        gap: 30px;
+        justify-content: space-between;
+        min-height: 600px;
+    }
+&__items{
+    position: relative;
+}
+    &__items__pls {
+        background-image: url(../assets/pls5.png);
+        width: 50%;
+        background-position: center bottom;
+        background-repeat: no-repeat;
+        color: #fff;
+        background-color: #000;
+        position: relative;
+        padding: 30px;
+    }
+
+    &__items__parfume {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        color: white;
+        gap: 30px;
+
+        .feature__items__womens {
+            width: 100%;
+            background: url('../assets/woman.png');
+            background-color: black;
+            background-position: right bottom;
+            background-repeat: no-repeat;
+            height: 100%;
+            position: relative;
+            padding: 20px;
+        }
+
+        .feature__items__speaker {
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+
+            .feature__items:nth-child(1) {
+                background: url('../assets/speakerS.png');
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-color: #000;
+
+            }
+
+            .feature__items:nth-child(2) {
+                background: url('../assets/gucci.png');
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-color: #000;
+            }
+        }
+
+    }
+
+
+}
+
+.pls__wrapper {
+    position: absolute;
+    bottom: 30px;
+
+    h4 {
+        font-weight: 600;
+        font-size: 24px;
+    }
+
+    p {
+        margin-top: 16px;
+        margin-bottom: 16px;
+        font-size: 14px;
+    }
+}
+.parfume__wrapper{
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+        h4{
+            font-size: 24px;
+        }
+        p{
+            font-size: 14px;
+        }
+}

@@ -12,11 +12,13 @@
 </head>
 
 <body>
+    <div class="loading">
+        <span class="loader"></span>
+    </div>
     <header>
         <div class="navbarTop">
             <div class="navbarTop__info">
                 <p>Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%! <a href="#">ShopNow</a></p>
-
             </div>
             <select name="language">
                 <option value="1">English</option>
@@ -28,18 +30,10 @@
             <nav class="navbar">
                 <div class="navbar__logo">Exclusive</div>
                 <ul class="navbar__item">
-                    <li>
-                        <a href="#">Home</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Sign in</a>
-                    </li>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Sign in</a></li>
                 </ul>
                 <div class="navbar__icon">
                     <div class="navbar__input">
@@ -60,6 +54,7 @@
         </div>
         <hr>
     </header>
+
     <main>
         <section class="hero">
             <div class="container">
@@ -102,9 +97,104 @@
                 <div class="products__card" id="productsCard"></div>
             </div>
         </section>
-
-
+        <section class="banner">
+            <div class="container">
+                <div class="banner__wrapper">
+                    <div class="banner__title">
+                        <span>Categories</span>
+                        <h3>Enhance Your Music Experience</h3>
+                        <div class="banner__hour">
+                            <div class="banner__hour__item">
+                                <p>23</p>
+                                <p>Hours</p>
+                            </div>
+                            <div class="banner__hour__item">
+                                <p>05</p>
+                                <p>Days</p>
+                            </div>
+                            <div class="banner__hour__item">
+                                <p>59</p>
+                                <p>MInutes</p>
+                            </div>
+                            <div class="banner__hour__item">
+                                <p>35</p>
+                                <p>Seconds</p>
+                            </div>
+                        </div>
+                        <button class="banner__btn">Buy now!</button>
+                    </div>
+                    <div class="banner__image">
+                        <img src="./assets/speaker.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="feature">
+            <div class="container">
+                <div class="category__logo">
+                    <div class="category__logo__div"></div>
+                    <p>Features</p>
+                </div>
+                <h2 class="category__heading">Browse By Category</h2>
+                <div class="feature__wrapper">
+                    <div class="feature__items__pls">
+                        <div class="pls__wrapper">
+                            <h4>PlayStation 5</h4>
+                            <p>Black and White version of the PS5 coming out on sale.</p>
+                            <button class="hero__btn">Shop Now &#10132;</button>
+                        </div>
+                    </div>
+                    <div class="feature__items__parfume">
+                        <div class="feature__items__womens">
+                            <div class="pls__wrapper">
+                                <h4>Women Collections</h4>
+                                <p>Featured woman collections that give you another vibe.</p>
+                                <button class="hero__btn">Shop Now &#10132;</button>
+                            </div>
+                        </div>
+                        <div class="feature__items__speaker">
+                            <div class="feature__items">
+                                <div class="parfume__wrapper">
+                                    <h4>Speakers</h4>
+                                    <p>Amazon wireless speakers</p>
+                                    <button class="hero__btn">Shop Now &#10132;</button>
+                                </div>
+                            </div>
+                            <div class="feature__items">
+                                <div class="parfume__wrapper">
+                                    <h4>Perfume</h4>
+                                    <p>GUCCI INTENSE OUD EDP</p>
+                                    <button class="hero__btn">Shop Now &#10132;</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="servise">
+            <div class="container">
+                <div class="servise__wrapper">
+                    <div class="servise__item">
+                        <div class="servise__image"><img src="./assets/icon-delivery.svg" alt=""></div>
+                        <span>FREE AND FAST DELIVERY</span>
+                        <p>Free delivery for all orders over $140</p>
+                    </div>
+                    <div class="servise__item">
+                        <div class="servise__image"><img src="./assets/Icon-Customer service.svg" alt=""></div>
+                        <span>24/7 CUSTOMER SERVICE</span>
+                        <p>Friendly 24/7 customer support</p>
+                    </div>
+                    <div class="servise__item">
+                        <div class="servise__image"><img src="./assets/Icon-secure.svg" alt=""></div>
+                        <span>MONEY BACK GUARANTEE</span>
+                        <p>We reurn money within 30 days</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
+
     <footer></footer>
 
     <script src="./app.js"></script>
