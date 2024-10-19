@@ -5,6 +5,12 @@
             place-items: center;
         }
     }
+    .footer{
+        &__wrapper{
+            grid-template-columns: repeat(4, 1fr);
+
+        }
+    }    
 }
 
 @media(max-width:990px) {
@@ -57,6 +63,12 @@
 
         &__items__pls {
             display: none;
+        }
+    }
+    .footer{
+        &__wrapper{
+            display: flex;
+            flex-wrap: wrap;
         }
     }
 }
@@ -171,6 +183,12 @@
             h3 {
                 width: 200px;
             }
+        }
+    }
+    .footer{
+        &__wrapper{
+            justify-content: center;
+            text-align: center;
         }
     }
 }

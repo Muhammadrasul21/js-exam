@@ -44,6 +44,7 @@ function produCts(products, page = 1) {
     productsToShow.forEach(product => {
         const productCard = document.createElement('div');
         productCard.classList.add('product__card');
+        productCard.setAttribute('data-id', product.id);
 
         const ratingStars = `
             <div>
@@ -128,3 +129,11 @@ window.onload = function () {
     fetchCategory();
     fetchAllProducts();
 };
+
+const productsCard = document.querySelector("#productsCard");
+productsCard.addEventListener("click", (event) => {
+    if (event.target.classList.contains("product__image")) {
+        let id = event.target.closest(".product__card").dataset.id;
+        open(`/pages/product.html?q=${id}`, "_self");
+    }
+});

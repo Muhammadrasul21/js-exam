@@ -1,13 +1,14 @@
 .footer {
     background: #000;
-    height: 440px;
+    height: auto;
     display: flex;
     align-items: center;
 
     &__wrapper {
         color: #fff;
         gap: 87px;
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
     }
 
     &__item {
