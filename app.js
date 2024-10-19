@@ -1,10 +1,3 @@
-const categoryImages = {
-    electronics: 'https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg',
-    jewelery: 'https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg',
-    "men's clothing": 'https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg',
-    "women's clothing": 'https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_.jpg'
-};
-
 async function fetchCategory() {
     const loader = document.querySelector('.loading');
     loader.style.display = 'flex';
@@ -17,7 +10,7 @@ async function fetchCategory() {
             const categoryCard = document.createElement('div');
             categoryCard.classList.add('category__card');
             categoryCard.innerHTML = `
-                <img src="${categoryImages[category]}" alt="">
+                <img src="${categoryImages[category]}" alt="${category} image">
                 <p>${category}</p>
             `;
             categoryGrid.appendChild(categoryCard);
@@ -25,16 +18,15 @@ async function fetchCategory() {
                 categoryProducts(category);
             });
         });
+    } catch (error) {
+        console.error('Error fetching categories:', error);
+        alert('Failed to load categories. Please try again later.');
     } finally {
         loader.style.display = 'none';
     }
 }
 
-let currentPage = 1;
-const itemsPage = 8;
-let allProducts = [];
-
-function produCts(products, page = 1) {
+function displayProducts(products, page = 1) {
     const productsCard = document.querySelector('#productsCard');
     productsCard.innerHTML = '';
     const startIndex = (page - 1) * itemsPage;
@@ -59,7 +51,7 @@ function produCts(products, page = 1) {
                 <i class="fa-solid fa-eye"></i>
             </div>
             <div class="img">
-                <img src="${product.image}" alt="" class="product__image">
+                <img src="${product.image}" alt="${product.title}" class="product__image">
             </div>
             <div class="product__details">
                 <h3 class="product__title">${product.title.slice(0, 40)} ...</h3>
@@ -83,17 +75,24 @@ async function categoryProducts(category) {
         const products = await res.json();
         allProducts = products;
         currentPage = 1;
-        produCts(products, currentPage);
+        displayProducts(products, currentPage);
 
-        const seeMoreButton = document.querySelector('.seeMore');
+        const seeMoreButton = document.querySelector('.seeMore') || document.createElement('button');
+        seeMoreButton.textContent = 'See More';
+        seeMoreButton.classList.add('seeMore');
+        document.querySelector('.products').appendChild(seeMoreButton);
         seeMoreButton.style.display = 'block';
+
         seeMoreButton.onclick = () => {
             currentPage++;
-            produCts(products, currentPage);
+            displayProducts(products, currentPage);
             if (currentPage * itemsPage >= products.length) {
                 seeMoreButton.style.display = 'none';
             }
         };
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        alert('Failed to load products. Please try again later.');
     } finally {
         loader.style.display = 'none';
     }
@@ -106,7 +105,7 @@ async function fetchAllProducts() {
         const res = await fetch('https://fakestoreapi.com/products');
         const products = await res.json();
         allProducts = products;
-        produCts(products, currentPage);
+        displayProducts(products, currentPage);
 
         const seeMoreButton = document.createElement('button');
         seeMoreButton.textContent = 'See More';
@@ -115,11 +114,14 @@ async function fetchAllProducts() {
 
         seeMoreButton.addEventListener('click', () => {
             currentPage++;
-            produCts(allProducts, currentPage);
+            displayProducts(allProducts, currentPage);
             if (currentPage * itemsPage >= allProducts.length) {
                 seeMoreButton.style.display = 'none';
             }
         });
+    } catch (error) {
+        console.error('Error fetching all products:', error);
+        alert('Failed to load all products. Please try again later.');
     } finally {
         loader.style.display = 'none';
     }
