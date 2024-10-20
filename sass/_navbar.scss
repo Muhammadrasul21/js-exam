@@ -210,3 +210,32 @@
         }
     }
 }
+
+.sidebar {
+    width: 80%;
+    position: fixed;
+    top: 0px;
+    right: -100%;
+    // right: 0;
+    transition: right 0.3s ease;
+    z-index: 1;
+
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 20px;
+        height: 100vh;
+        border-radius: 20px 0px 0px 20px;
+        color: #fff;
+        background: #2c2525;
+    }
+
+    &__exit {
+        width: 100%;
+        display: flex;
+        justify-content: start;
+        cursor: pointer;
+    }
+}

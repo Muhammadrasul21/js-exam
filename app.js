@@ -1,3 +1,6 @@
+const sidebar = document.querySelector(".sidebar")
+const hamburger = document.querySelector(".navbar__hamburger")
+const sidebarExit = document.querySelector(".sidebar__exit")
 const categoryImages = {
     "electronics": "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
     "jewelery": "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg",
@@ -5,14 +8,30 @@ const categoryImages = {
     "women's clothing": "https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2.jpg"
 };
 
+hamburger.addEventListener("click", () => {
+    sidebar.style.right = "0px";
+});
+sidebarExit.addEventListener("click", () => {
+    sidebar.style.right = "-100%";
+});
+document.addEventListener("click", (event) => {
+    if (!sidebar.contains(event.target) && !hamburger.contains(event.target)) {
+        sidebar.style.right = "-100%";
+    }
+});
+
 let currentPage = 1;
 const itemsPage = 8;
 let allProducts = [];
-const loader = document.querySelector('.loading');
+
+const loader2 = document.querySelector('.loading')
+
+console.log(loader2);
+
 
 async function fetchCategory() {
-    loader.style.display = 'flex';
     try {
+        loader2.style.display = 'block';
         let categories = JSON.parse(localStorage.getItem('categories'));
         if (!categories) {
             const res = await fetch('https://fakestoreapi.com/products/categories');
@@ -38,7 +57,7 @@ async function fetchCategory() {
         console.error('Error fetching categories:', error.message || error);
         alert('Failed to load categories. Please try again later.');
     } finally {
-        loader.style.display = 'none';
+        loader2.style.display = 'none';
     }
 }
 
@@ -103,7 +122,7 @@ async function categoryProducts(category) {
 }
 
 async function fetchAllProducts() {
-    loader.style.display = 'flex';
+    loader2.style.display = 'flex';
     try {
         const res = await fetch('https://fakestoreapi.com/products');
         if (!res.ok) throw new Error('Network response was not ok');
@@ -116,7 +135,7 @@ async function fetchAllProducts() {
         console.error('Error fetching all products:', error.message || error);
         alert('Failed to load all products. Please try again later.');
     } finally {
-        loader.style.display = 'none';
+        loader2.style.display = 'none';
     }
 }
 
