@@ -1,26 +1,28 @@
-// Kategoriyalar uchun rasmlar ro'yxati
 const categoryImages = {
-    "electronics": "path/to/electronics.jpg",
-    "jewelery": "path/to/jewelery.jpg",
-    "men's clothing": "path/to/mens_clothing.jpg",
-    "women's clothing": "path/to/womens_clothing.jpg"
+    "electronics": "https://fakestoreapi.com/img/61IBBVJvSDL._AC_SY879_.jpg",
+    "jewelery": "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg",
+    "men's clothing": "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
+    "women's clothing": "https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2.jpg"
 };
 
 let currentPage = 1;
-const itemsPage = 10;
+const itemsPage = 8;
 let allProducts = [];
+const loader = document.querySelector('.loading');
 
-// Kategoriyalarni olish funksiyasi
 async function fetchCategory() {
-    const loader = document.querySelector('.loading');
     loader.style.display = 'flex';
     try {
-        const res = await fetch('https://fakestoreapi.com/products/categories');
-        if (!res.ok) throw new Error('Network response was not ok');
-        const categories = await res.json();
-        localStorage.setItem('categories', JSON.stringify(categories));
-        
+        let categories = JSON.parse(localStorage.getItem('categories'));
+        if (!categories) {
+            const res = await fetch('https://fakestoreapi.com/products/categories');
+            if (!res.ok) throw new Error('Network response was not ok');
+            categories = await res.json();
+            localStorage.setItem('categories', JSON.stringify(categories));
+        }
+
         const categoryGrid = document.querySelector('#categoryGrid');
+        categoryGrid.innerHTML = '';
         categories.forEach(category => {
             const categoryCard = document.createElement('div');
             categoryCard.classList.add('category__card');
@@ -30,9 +32,7 @@ async function fetchCategory() {
             `;
             categoryGrid.appendChild(categoryCard);
 
-            categoryCard.addEventListener('click', () => {
-                categoryProducts(category);
-            });
+            categoryCard.addEventListener('click', () => categoryProducts(category));
         });
     } catch (error) {
         console.error('Error fetching categories:', error.message || error);
@@ -42,10 +42,9 @@ async function fetchCategory() {
     }
 }
 
-// Mahsulotlarni ko'rsatish funksiyasi
 function displayProducts(products, page = 1) {
     const productsCard = document.querySelector('#productsCard');
-    productsCard.innerHTML = '';
+
     const startIndex = (page - 1) * itemsPage;
     const endIndex = page * itemsPage;
     const productsToShow = products.slice(startIndex, endIndex);
@@ -84,9 +83,7 @@ function displayProducts(products, page = 1) {
     });
 }
 
-// Kategoriya asosida mahsulotlarni olish va ko'rsatish funksiyasi
 async function categoryProducts(category) {
-    const loader = document.querySelector('.loading');
     loader.style.display = 'flex';
     try {
         const res = await fetch(`https://fakestoreapi.com/products/category/${category}`);
@@ -96,19 +93,7 @@ async function categoryProducts(category) {
         currentPage = 1;
         displayProducts(products, currentPage);
 
-        const seeMoreButton = document.querySelector('.seeMore') || document.createElement('button');
-        seeMoreButton.textContent = 'See More';
-        seeMoreButton.classList.add('seeMore');
-        document.querySelector('.products').appendChild(seeMoreButton);
-        seeMoreButton.style.display = 'block';
-
-        seeMoreButton.onclick = () => {
-            currentPage++;
-            displayProducts(products, currentPage);
-            if (currentPage * itemsPage >= products.length) {
-                seeMoreButton.style.display = 'none';
-            }
-        };
+        handleSeeMore(products);
     } catch (error) {
         console.error('Error fetching products:', error.message || error);
         alert('Failed to load products. Please try again later.');
@@ -117,9 +102,7 @@ async function categoryProducts(category) {
     }
 }
 
-// Barcha mahsulotlarni olish funksiyasi
 async function fetchAllProducts() {
-    const loader = document.querySelector('.loading');
     loader.style.display = 'flex';
     try {
         const res = await fetch('https://fakestoreapi.com/products');
@@ -128,18 +111,7 @@ async function fetchAllProducts() {
         allProducts = products;
         displayProducts(products, currentPage);
 
-        const seeMoreButton = document.createElement('button');
-        seeMoreButton.textContent = 'See More';
-        seeMoreButton.classList.add('seeMore');
-        document.querySelector('.products').appendChild(seeMoreButton);
-
-        seeMoreButton.addEventListener('click', () => {
-            currentPage++;
-            displayProducts(allProducts, currentPage);
-            if (currentPage * itemsPage >= allProducts.length) {
-                seeMoreButton.style.display = 'none';
-            }
-        });
+        handleSeeMore(products);
     } catch (error) {
         console.error('Error fetching all products:', error.message || error);
         alert('Failed to load all products. Please try again later.');
@@ -148,15 +120,31 @@ async function fetchAllProducts() {
     }
 }
 
-// Sahifa yuklanganida funksiyalarni chaqirish
+function handleSeeMore(products) {
+    let seeMoreButton = document.querySelector('.seeMore');
+    if (!seeMoreButton) {
+        seeMoreButton = document.createElement('button');
+        seeMoreButton.textContent = 'See More';
+        seeMoreButton.classList.add('seeMore');
+        document.querySelector('.products').appendChild(seeMoreButton);
+    }
+
+    seeMoreButton.style.display = 'block';
+    seeMoreButton.onclick = () => {
+        currentPage++;
+        displayProducts(products, currentPage);
+        if (currentPage * itemsPage >= products.length) {
+            seeMoreButton.style.display = 'none';
+        }
+    };
+}
+
 window.onload = function () {
     fetchCategory();
     fetchAllProducts();
 };
 
-// Mahsulotlar kartalariga hodisalar qo'shish
-const productsCard = document.querySelector("#productsCard");
-productsCard.addEventListener("click", (event) => {
+document.querySelector("#productsCard").addEventListener("click", (event) => {
     if (event.target.classList.contains("product__image")) {
         let id = event.target.closest(".product__card").dataset.id;
         open(`/pages/product.html?q=${id}`, "_self");

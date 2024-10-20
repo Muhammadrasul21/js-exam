@@ -1,18 +1,20 @@
 const content = document.querySelector(".content");
 const review = document.querySelector(".review");
 const loader = document.querySelector(".loading");
-const BASE_URL = "https://fakestoreapi.com/products";
+
+const urlParams = new URLSearchParams(window.location.search);
+const id = urlParams.get('q')
+
+const BASE_URL = `https://fakestoreapi.com/products/${id}`;
+
 
 async function getData() {
     loader.style.display = 'flex';
     try {
         const response = await fetch(`${BASE_URL}`);
-        const products = await response.json();
-        if (products.length > 0) {
-            createContent(products);
-        } else {
-            content.innerHTML = '<p>No products available.</p>';
-        }
+        const product = await response.json();
+        console.log(product);
+        createContent(product)
     } catch (err) {
         console.log('Error fetching data:', err);
     } finally {
@@ -20,13 +22,13 @@ async function getData() {
     }
 }
 
-function createContent(products) {
-    content.innerHTML = products.map(data => `
+function createContent(product) {
+    content.innerHTML = `
         <div>
-            <img src="${data.image}" class="content__image main__image" alt="${data.title}">
-            <h1>${data.title}</h1>
-            <h2>$${data.price}</h2>
-            <p>${data.description}</p>
+            <img src="${product.image}" class="content__image main__image">
+            <h1>${product.title}</h1>
+            <h2>$${product.price}</h2>
+            <p>${product.description}</p>
             <button>Buy now</button>
             <hr>
             <div class="color">
@@ -58,8 +60,7 @@ function createContent(products) {
                     <p>Return Delivery <br> Free 30 Days Delivery Returns. Details</p>
                 </div>
             </div>
-        </div>
-    `).join('');
+        </div>`
     review.innerHTML = '<p>No reviews available.</p>';
 }
 
