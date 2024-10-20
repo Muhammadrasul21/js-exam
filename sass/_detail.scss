@@ -1,10 +1,12 @@
 .content {
-    margin-top: 100px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 50px;
-    grid-gap: 40px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
 
+    &__info {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 img {
@@ -27,6 +29,7 @@ img {
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
+
 }
 
 .review__item {
@@ -63,19 +66,24 @@ button {
     background: inherit;
     border: none;
     border-radius: 4px;
+    cursor: pointer;
+    margin: 0 auto;
+
 
     &:hover {
         background: #DB4444;
         color: #fff;
     }
 }
-.bynow{
+
+.bynow {
     display: flex;
     gap: 10px;
     margin-bottom: 25px;
     margin-top: 25px;
 }
-.free{
+
+.free {
     display: flex;
     flex-direction: column;
 }
