@@ -24,6 +24,8 @@ async function getData() {
 
 function createContent(product) {
     content.innerHTML = `
+    
+<div class="container">
  <div class="content">
 
     <img src="${product.image}" class="content__image main__image">
@@ -63,6 +65,7 @@ function createContent(product) {
             </div>
         </div>
     </div>
+</div>
 </div>
        `
 }
