@@ -32,7 +32,6 @@ function createContent(product) {
         <h1>${product.title}</h1>
         <h2>$${product.price}</h2>
         <p>${product.description}</p>
-        <button>Buy now</button>
         <hr>
         <div class="color">
             <p>Colours:</p>
