@@ -1,31 +1,48 @@
+// Kategoriyalar uchun rasmlar ro'yxati
+const categoryImages = {
+    "electronics": "path/to/electronics.jpg",
+    "jewelery": "path/to/jewelery.jpg",
+    "men's clothing": "path/to/mens_clothing.jpg",
+    "women's clothing": "path/to/womens_clothing.jpg"
+};
+
+let currentPage = 1;
+const itemsPage = 10;
+let allProducts = [];
+
+// Kategoriyalarni olish funksiyasi
 async function fetchCategory() {
     const loader = document.querySelector('.loading');
     loader.style.display = 'flex';
     try {
         const res = await fetch('https://fakestoreapi.com/products/categories');
+        if (!res.ok) throw new Error('Network response was not ok');
         const categories = await res.json();
         localStorage.setItem('categories', JSON.stringify(categories));
+        
         const categoryGrid = document.querySelector('#categoryGrid');
         categories.forEach(category => {
             const categoryCard = document.createElement('div');
             categoryCard.classList.add('category__card');
             categoryCard.innerHTML = `
-                <img src="${categoryImages[category]}" alt="${category} image">
+                <img src="${categoryImages[category]}" alt="${category}">
                 <p>${category}</p>
             `;
             categoryGrid.appendChild(categoryCard);
+
             categoryCard.addEventListener('click', () => {
                 categoryProducts(category);
             });
         });
     } catch (error) {
-        console.error('Error fetching categories:', error);
+        console.error('Error fetching categories:', error.message || error);
         alert('Failed to load categories. Please try again later.');
     } finally {
         loader.style.display = 'none';
     }
 }
 
+// Mahsulotlarni ko'rsatish funksiyasi
 function displayProducts(products, page = 1) {
     const productsCard = document.querySelector('#productsCard');
     productsCard.innerHTML = '';
@@ -67,11 +84,13 @@ function displayProducts(products, page = 1) {
     });
 }
 
+// Kategoriya asosida mahsulotlarni olish va ko'rsatish funksiyasi
 async function categoryProducts(category) {
     const loader = document.querySelector('.loading');
     loader.style.display = 'flex';
     try {
         const res = await fetch(`https://fakestoreapi.com/products/category/${category}`);
+        if (!res.ok) throw new Error('Network response was not ok');
         const products = await res.json();
         allProducts = products;
         currentPage = 1;
@@ -91,18 +110,20 @@ async function categoryProducts(category) {
             }
         };
     } catch (error) {
-        console.error('Error fetching products:', error);
+        console.error('Error fetching products:', error.message || error);
         alert('Failed to load products. Please try again later.');
     } finally {
         loader.style.display = 'none';
     }
 }
 
+// Barcha mahsulotlarni olish funksiyasi
 async function fetchAllProducts() {
     const loader = document.querySelector('.loading');
     loader.style.display = 'flex';
     try {
         const res = await fetch('https://fakestoreapi.com/products');
+        if (!res.ok) throw new Error('Network response was not ok');
         const products = await res.json();
         allProducts = products;
         displayProducts(products, currentPage);
@@ -120,18 +141,20 @@ async function fetchAllProducts() {
             }
         });
     } catch (error) {
-        console.error('Error fetching all products:', error);
+        console.error('Error fetching all products:', error.message || error);
         alert('Failed to load all products. Please try again later.');
     } finally {
         loader.style.display = 'none';
     }
 }
 
+// Sahifa yuklanganida funksiyalarni chaqirish
 window.onload = function () {
     fetchCategory();
     fetchAllProducts();
 };
 
+// Mahsulotlar kartalariga hodisalar qo'shish
 const productsCard = document.querySelector("#productsCard");
 productsCard.addEventListener("click", (event) => {
     if (event.target.classList.contains("product__image")) {
