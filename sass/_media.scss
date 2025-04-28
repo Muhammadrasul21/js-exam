@@ -58,13 +58,7 @@
     }
 
     .feature {
-        &__wrapper {
-            flex-direction: column;
-        }
-
-        &__items__pls {
-            display: none;
-        }
+        display: none;
     }
 
     .footer {
@@ -171,6 +165,16 @@
 }
 
 @media (max-width:500px) {
+    .feature {
+        display: none;
+    }
+
+    .products {
+        &__arrowBtn {
+            display: none;
+        }
+    }
+
     .banner {
         &__title {
             h3 {
